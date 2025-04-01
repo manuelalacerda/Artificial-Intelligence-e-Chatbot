@@ -1,0 +1,573 @@
+{
+  "intents": [
+    {
+      "intent": "informações_de_preparo",
+      "examples": [
+        {
+          "text": "Como devo me alimentar antes de doar sangue?"
+        },
+        {
+          "text": "O que eu preciso fazer para me preparar para doar sangue?"
+        },
+        {
+          "text": "Posso doar sangue estando gripado ou com resfriado?"
+        },
+        {
+          "text": "Posso tomar medicamentos antes de doar sangue?"
+        },
+        {
+          "text": "Preciso descansar antes de doar sangue?"
+        },
+        {
+          "text": "Quero doar sangue o que preciso fazer?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "localização",
+      "examples": [
+        {
+          "text": "Onde posso doar sangue?"
+        },
+        {
+          "text": "Onde posso doar sangue perto de mim?"
+        },
+        {
+          "text": "Onde posso encontrar unidades móveis de doação de sangue?"
+        },
+        {
+          "text": "Preciso de um lugar para doar sangue agora, onde posso ir?"
+        },
+        {
+          "text": "Quais são as unidades para doar sangue?"
+        },
+        {
+          "text": "Qual é o posto de coleta de sangue mais próximo?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "tipos_doadores",
+      "examples": [
+        {
+          "text": "Eu sou do tipo sanguíneo A, posso doar?"
+        },
+        {
+          "text": "Eu sou fumante, posso doar?"
+        },
+        {
+          "text": "Eu tenho tatuagem posso doar?"
+        },
+        {
+          "text": "Existe idade minima para doar sangue?"
+        },
+        {
+          "text": "Qual a faixa etária que pode doar sangue?"
+        },
+        {
+          "text": "Qual o seu tipo sanguíneo?"
+        },
+        {
+          "text": "Quem pode doar?"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "doacao",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "historico de doenças",
+          "synonyms": [
+            "historico de doencas"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "intervalo de tempo",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "tipo sanguineo",
+          "synonyms": [
+            "sangue"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "tipo_sangue",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "A+",
+          "synonyms": [
+            "a+",
+            "A Positivo"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "A-",
+          "synonyms": [
+            "a-",
+            "A Negativo"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "AB+",
+          "synonyms": [
+            "ab+",
+            "AB Positivo"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "AB-",
+          "synonyms": [
+            "ab-",
+            "AB Negativo"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "B+",
+          "synonyms": [
+            "b+",
+            "B Positivo"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "B-",
+          "synonyms": [
+            "b-",
+            "B Negativo"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "O+",
+          "synonyms": [
+            "o+",
+            "O Positivo"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "O-",
+          "synonyms": [
+            "o-",
+            "O Negativo"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "unidades",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Mauá",
+          "synonyms": [
+            "maua"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Patriarca",
+          "synonyms": [
+            "vila re",
+            "vila ré"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Paulista",
+          "synonyms": [
+            "paulista"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Bem-vindo",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá. Como posso te ajudar?"
+              },
+              {
+                "text": "Olá, eu sou Health Bot, como posso te ajudar?"
+              },
+              {
+                "text": "Eu sou Health Bot e estou aqui para te auxiliar, Qual seria sua dúvida?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "Em outros casos",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Eu não entendi. Você pode tentar reformular a frase."
+              },
+              {
+                "text": "Você pode reformular sua afirmação? Eu não estou entendendo."
+              },
+              {
+                "text": "Eu não entendi o sentido."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Em outros casos",
+      "previous_sibling": "node_2_1743455339178",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Localização das unidades",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "As unidades são:"
+              },
+              {
+                "text": "Maúa"
+              },
+              {
+                "text": "Paulista"
+              },
+              {
+                "text": "Patriarca"
+              },
+              {
+                "text": "Digite a unidades mais proxima:"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          }
+        ]
+      },
+      "conditions": "#localização",
+      "dialog_node": "node_10_1743454672457",
+      "previous_sibling": "node_9_1743516093474"
+    },
+    {
+      "type": "standard",
+      "title": "Unidade Patriarca",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você encontrar a unidade Patriarca , está localizada neste endereço:\"Av. Patriarca,1106\""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1743454672457",
+      "conditions": "@unidades:Patriarca",
+      "dialog_node": "node_10_1743515232475",
+      "previous_sibling": "node_3_1743515140540"
+    },
+    {
+      "type": "standard",
+      "title": "Unidade Mauá",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você encontrar a unidade Mauá , está localizada neste endereço:\"Av. Mauá,1106\""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1743454672457",
+      "conditions": "@unidades:Mauá",
+      "dialog_node": "node_1_1743515265260",
+      "previous_sibling": "node_10_1743515232475"
+    },
+    {
+      "type": "standard",
+      "parent": "node_3_1743517992262",
+      "conditions": "@tipo_sangue:A-",
+      "dialog_node": "node_1_1743519214538",
+      "previous_sibling": "node_2_1743519103115"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "● Ter entre 16 e 69 anos (menores de 18 precisam de autorização)."
+              },
+              {
+                "text": "● Pesar mais de 50 kg."
+              },
+              {
+                "text": "● Estar bem de saúde e alimentado (evite comidas gordurosas antes)."
+              },
+              {
+                "text": "● Não ter bebido álcool nas últimas 12 horas."
+              },
+              {
+                "text": "● Levar um documento com foto (RG, CNH, etc.)."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          }
+        ]
+      },
+      "conditions": "#informações_de_preparo",
+      "dialog_node": "node_2_1743455339178",
+      "previous_sibling": "node_10_1743454672457"
+    },
+    {
+      "type": "standard",
+      "parent": "node_3_1743517992262",
+      "conditions": "@tipo_sangue:(A+)",
+      "dialog_node": "node_2_1743519103115"
+    },
+    {
+      "type": "standard",
+      "title": "Unidades Paulista",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para você encontrar a unidade Paulista , está localizada neste endereço:\"Av. Paulista,1106\""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1743454672457",
+      "conditions": "@unidades:Paulista",
+      "dialog_node": "node_3_1743515140540"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual o seu tipo sanguíneo (Exemplo O+)  ?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1742913780074",
+      "conditions": "@doacao:(tipo sanguineo)",
+      "dialog_node": "node_3_1743517992262"
+    },
+    {
+      "type": "standard",
+      "parent": "node_3_1743517992262",
+      "conditions": "@tipo_sangue:(B+)",
+      "dialog_node": "node_4_1743519228098",
+      "previous_sibling": "node_1_1743519214538"
+    },
+    {
+      "type": "standard",
+      "parent": "node_3_1743517992262",
+      "conditions": "@tipo_sangue:(AB+)",
+      "dialog_node": "node_4_1743519259002",
+      "previous_sibling": "node_9_1743519244481"
+    },
+    {
+      "type": "standard",
+      "title": "Tipos doadores",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Quais as opções que você se refere:"
+              },
+              {
+                "text": "Tipo sanguíneo"
+              },
+              {
+                "text": "Historico de doenças"
+              },
+              {
+                "text": "Intervalo de tempo para outra doação"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          }
+        ]
+      },
+      "conditions": "#tipos_doadores",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_5_1742913780074",
+      "previous_sibling": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Você tem algum histórico de doenças?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1742913780074",
+      "conditions": "@doacao:(historico de doenças)",
+      "dialog_node": "node_6_1743518329269",
+      "previous_sibling": "node_3_1743517992262"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Caso nenhuma das opções te atendeu, ligue para o 0800-777-111"
+              },
+              {
+                "text": "Obrigado. Volte sempre! A Heath Tech agradece pela sua atenção !"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          }
+        ]
+      },
+      "parent": "node_10_1743454672457",
+      "conditions": "@unidades != \"Paulista\" &&  @unidades != \"Patriarca\" && @unidades != \"Mauá\"",
+      "dialog_node": "node_7_1743516531865",
+      "previous_sibling": "node_1_1743515265260"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual foi  a ultima vez que fez doação de sangue?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1742913780074",
+      "conditions": "@doacao:(intervalo de tempo)",
+      "dialog_node": "node_8_1743518457020",
+      "previous_sibling": "node_6_1743518329269"
+    },
+    {
+      "type": "standard",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_3_1743515140540"
+      },
+      "conditions": "#localização && @unidades",
+      "dialog_node": "node_9_1743516093474",
+      "previous_sibling": "node_5_1742913780074"
+    },
+    {
+      "type": "standard",
+      "parent": "node_3_1743517992262",
+      "conditions": "@tipo_sangue:B-",
+      "dialog_node": "node_9_1743519244481",
+      "previous_sibling": "node_4_1743519228098"
+    },
+    {
+      "type": "standard",
+      "parent": "node_3_1743517992262",
+      "conditions": "@tipo_sangue:AB-",
+      "dialog_node": "node_9_1743519272937",
+      "previous_sibling": "node_4_1743519259002"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": "Você quis dizer:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "Nenhuma das anteriores",
+      "use_connect_to_support_prompt": "Connect to support",
+      "single_answer_clarification_prompt": "Something else"
+    },
+    "human_agent_assist": {
+      "prompt": "Você quis dizer:"
+    }
+  },
+  "learning_opt_out": false,
+  "language": "pt-br",
+  "description": "",
+  "name": "Assistente de Saúde para Doação de Sangue"
+}
