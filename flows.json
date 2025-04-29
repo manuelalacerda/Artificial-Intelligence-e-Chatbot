@@ -1,0 +1,181 @@
+[
+    {
+        "id": "e16d71901c9337a6",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9ccb4301a8a301e5",
+        "type": "telegram receiver",
+        "z": "e16d71901c9337a6",
+        "name": "",
+        "bot": "9f4467c78e846b8e",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "f3abfb1fb44244cc"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b531e68808ac69e4",
+        "type": "telegram sender",
+        "z": "e16d71901c9337a6",
+        "name": "",
+        "bot": "9f4467c78e846b8e",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 790,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "446d24e3ee65e42b",
+        "type": "watson-speech-to-text",
+        "z": "e16d71901c9337a6",
+        "name": "",
+        "alternatives": 1,
+        "speakerlabels": true,
+        "smartformatting": false,
+        "lang": "pt-BR",
+        "langhidden": "pt-BR",
+        "langcustom": "NoCustomisationSetting",
+        "langcustomhidden": "",
+        "custom-weight": "0.5",
+        "band": "BroadbandModel",
+        "bandhidden": "",
+        "keywords": "",
+        "keywords-threshold": "0.5",
+        "word-confidence": false,
+        "password": "",
+        "apikey": "sSTr4C6SL_laP-UjIZxHs0MuUKm1YVJL-C1lXI3z0pmr",
+        "payload-response": true,
+        "streaming-mode": false,
+        "streaming-mute": true,
+        "auto-connect": false,
+        "discard-listening": false,
+        "disable-precheck": false,
+        "service-endpoint": "https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/d7c630a5-0819-492d-a5ea-6ff40018bed2",
+        "x": 480,
+        "y": 100,
+        "wires": [
+            [
+                "6dd0c6698611d0c3"
+            ]
+        ]
+    },
+    {
+        "id": "c66066a98a882e6a",
+        "type": "debug",
+        "z": "e16d71901c9337a6",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "f3abfb1fb44244cc",
+        "type": "function",
+        "z": "e16d71901c9337a6",
+        "name": "Proc.Entrada Audio",
+        "func": "msg.params = {\n    \"session_id \":123\n\n\n};\nmsg.chatId = msg.payload.chatId;\nmsg.payload = msg.payload.weblink;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 100,
+        "wires": [
+            [
+                "446d24e3ee65e42b"
+            ]
+        ]
+    },
+    {
+        "id": "6dd0c6698611d0c3",
+        "type": "watson-assistant-v2",
+        "z": "e16d71901c9337a6",
+        "name": "",
+        "service-endpoint": "https://api.au-syd.assistant.watson.cloud.ibm.com/instances/323a4bf6-1586-4835-a0df-a55a69e5a70f",
+        "assistant_id": "b2241f97-0cbd-4d99-a057-5fa53f6449fd",
+        "debug": false,
+        "restart": false,
+        "return_context": true,
+        "alternate_intents": false,
+        "multisession": true,
+        "timeout": "",
+        "optout-learning": false,
+        "persist-session-id": false,
+        "x": 470,
+        "y": 200,
+        "wires": [
+            [
+                "9b4003dc56421ca3"
+            ]
+        ]
+    },
+    {
+        "id": "9b4003dc56421ca3",
+        "type": "function",
+        "z": "e16d71901c9337a6",
+        "name": "Proc Saida Watson",
+        "func": "msg.payload = {\n    chatId : msg.chatId,\n    type : \"message\",\n    content : msg.payload.output.generic[0].text\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 200,
+        "wires": [
+            [
+                "b531e68808ac69e4"
+            ]
+        ]
+    },
+    {
+        "id": "9f4467c78e846b8e",
+        "type": "telegram bot",
+        "botname": "Healthe_tech_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    }
+]
